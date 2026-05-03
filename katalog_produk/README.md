@@ -1,9 +1,9 @@
-# 🛒 TokoKita – Website Katalog Produk Sederhana
+#  TokoKita – Website Katalog Produk Sederhana
 **Tugas Praktikum Pemrograman Web | Framework Django**
 
 ---
 
-## 📋 Deskripsi Proyek
+##  Deskripsi Proyek
 
 Website katalog produk sederhana yang dibangun menggunakan framework **Django (Python)**.
 Website ini menampilkan daftar produk, detail produk, dan halaman kontak.
@@ -11,7 +11,7 @@ Data produk disimpan secara **hardcoded** di `views.py` (tidak menggunakan datab
 
 ---
 
-## 📁 Struktur Folder Proyek
+##  Struktur Folder Proyek
 
 ```
 katalog_produk/
@@ -43,7 +43,7 @@ katalog_produk/
 
 ---
 
-## 🗺️ Daftar URL (Routing)
+##  Daftar URL (Routing)
 
 | URL | Nama View | Keterangan |
 |-----|-----------|------------|
@@ -54,7 +54,7 @@ katalog_produk/
 
 ---
 
-## 🚀 Cara Menjalankan Proyek
+##  Cara Menjalankan Proyek
 
 ### Langkah 1 – Pastikan Python sudah terinstall
 ```bash
@@ -68,18 +68,6 @@ python -m venv venv
 ```
 
 ### Langkah 3 – Aktifkan Virtual Environment
-
-**Windows (Command Prompt):**
-```cmd
-venv\Scripts\activate
-```
-
-**Windows (PowerShell):**
-```powershell
-venv\Scripts\Activate.ps1
-```
-
-**Mac / Linux:**
 ```bash
 source venv/bin/activate
 ```
@@ -107,22 +95,9 @@ python manage.py runserver
 ### Langkah 8 – Buka di Browser
 Buka browser dan akses: **http://127.0.0.1:8000/**
 
----
 
-## 📸 Halaman yang Perlu Di-screenshot untuk Laporan
 
-| No | Halaman | URL | Keterangan |
-|----|---------|-----|------------|
-| 1 | Beranda (Homepage) | `http://127.0.0.1:8000/` | Halaman selamat datang |
-| 2 | Daftar Produk | `http://127.0.0.1:8000/produk/` | Grid semua produk |
-| 3 | Detail Produk 1 | `http://127.0.0.1:8000/produk/1/` | Detail Laptop ASUS |
-| 4 | Detail Produk 2 | `http://127.0.0.1:8000/produk/2/` | Detail Samsung Galaxy |
-| 5 | Detail Produk 3 | `http://127.0.0.1:8000/produk/3/` | Detail Tas Eiger |
-| 6 | Halaman Kontak | `http://127.0.0.1:8000/kontak/` | Informasi kontak |
-
----
-
-## 💡 Teknologi yang Digunakan
+##  Teknologi yang Digunakan
 
 - **Python 3.x** – Bahasa pemrograman
 - **Django 4.x / 5.x** – Web framework
@@ -131,10 +106,7 @@ Buka browser dan akses: **http://127.0.0.1:8000/**
 
 ---
 
-## 👤 Informasi Pengembang
+##  Informasi Pengembang
 
-- **Nama**: [Isi Nama Anda]
-- **NIM**: [Isi NIM Anda]
-- **Mata Kuliah**: Pemrograman Web
-- **Dosen**: [Isi Nama Dosen]
-- **Tahun**: 2024
+- **Nama**: Raysha Tazkiya Rahim
+- **NIM**: 2308107010057
