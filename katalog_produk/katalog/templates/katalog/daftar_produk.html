@@ -1,0 +1,184 @@
+{% extends 'katalog/base.html' %}
+
+{% block extra_css %}
+<style>
+    /* ─── TOOLBAR ────────────────────────────── */
+    .toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1.75rem;
+    }
+
+    .toolbar-count {
+        font-size: 0.85rem;
+        color: var(--slate);
+    }
+
+    .toolbar-count strong {
+        color: var(--navy);
+        font-weight: 700;
+    }
+
+    /* ─── PRODUK GRID ────────────────────────── */
+    .produk-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+        gap: 1.25rem;
+    }
+
+    /* ─── PRODUK CARD ────────────────────────── */
+    .produk-card {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.18s, box-shadow 0.18s;
+    }
+
+    .produk-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+
+    /* Thumbnail area — warna berbeda per kategori */
+    .produk-thumb {
+        height: 130px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .produk-thumb svg {
+        width: 52px;
+        height: 52px;
+        opacity: 0.65;
+    }
+
+    /* Info area */
+    .produk-body {
+        padding: 1.2rem 1.35rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .produk-meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 0.55rem;
+    }
+
+    .produk-id {
+        font-size: 0.72rem;
+        color: var(--slate-light);
+        font-weight: 500;
+    }
+
+    .produk-nama {
+        font-size: 0.97rem;
+        font-weight: 700;
+        color: var(--navy);
+        line-height: 1.35;
+        margin-bottom: 0.5rem;
+    }
+
+    .produk-harga {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--blue);
+        margin-bottom: 0.3rem;
+    }
+
+    .produk-stok {
+        font-size: 0.78rem;
+        color: var(--slate);
+        margin-bottom: 1.1rem;
+    }
+
+    .produk-stok span {
+        color: #16a34a;
+        font-weight: 600;
+    }
+
+    .btn-detail-card {
+        margin-top: auto;
+        display: block;
+        text-align: center;
+        background: var(--blue-light);
+        color: var(--blue);
+        padding: 0.6rem;
+        border-radius: 7px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        border: 1px solid #c7d9fa;
+        transition: background 0.15s, color 0.15s;
+    }
+
+    .btn-detail-card:hover {
+        background: var(--blue);
+        color: white;
+        border-color: var(--blue);
+    }
+
+    @media (max-width: 640px) {
+        .produk-grid { grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+        .produk-thumb { height: 100px; }
+    }
+
+    @media (max-width: 420px) {
+        .produk-grid { grid-template-columns: 1fr; }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+    <h1>Katalog Produk</h1>
+    <p>Daftar lengkap produk kami dengan kualitas terjamin dan harga terbaik.</p>
+</div>
+
+<!-- TOOLBAR -->
+<div class="toolbar">
+    <div class="toolbar-count">
+        Menampilkan <strong>{{ produk_list|length }}</strong> produk
+    </div>
+</div>
+
+<!-- GRID PRODUK -->
+<div class="produk-grid">
+    {% for produk in produk_list %}
+    <div class="produk-card">
+
+        <!-- THUMBNAIL -->
+        <div class="produk-thumb" style="background: {{ produk.thumb_bg }};">
+            {{ produk.thumb_svg|safe }}
+        </div>
+
+        <!-- BODY -->
+        <div class="produk-body">
+            <div class="produk-meta">
+                <span class="badge" style="background: {{ produk.warna_badge }};">{{ produk.kategori }}</span>
+                <span class="produk-id">ID #{{ produk.id }}</span>
+            </div>
+            <div class="produk-nama">{{ produk.nama }}</div>
+            <div class="produk-harga">{{ produk.harga_format }}</div>
+            <div class="produk-stok">Stok: <span>{{ produk.stok }} unit</span></div>
+            <a href="{% url 'katalog:detail_produk' produk.id %}" class="btn-detail-card">Lihat Detail</a>
+        </div>
+
+    </div>
+    {% empty %}
+    <p style="color:var(--slate); padding: 3rem; grid-column: 1/-1; text-align:center;">
+        Belum ada produk tersedia.
+    </p>
+    {% endfor %}
+</div>
+
+{% endblock %}

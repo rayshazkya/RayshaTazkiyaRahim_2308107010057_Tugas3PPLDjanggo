@@ -1,0 +1,31 @@
+{% extends 'katalog/base.html' %}
+
+{% block content %}
+<div style="text-align:center; padding: 5rem 2rem;">
+    <div style="
+        width: 72px; height: 72px;
+        background: var(--blue-light);
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        margin: 0 auto 1.5rem;
+    ">
+        <svg width="32" height="32" fill="none" stroke="var(--blue)" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            <line x1="11" y1="8" x2="11" y2="12"/>
+            <line x1="11" y1="16" x2="11.01" y2="16"/>
+        </svg>
+    </div>
+    <h1 style="font-family:'DM Serif Display',serif; font-size:1.7rem; color:var(--navy); margin-bottom:0.5rem;">
+        Produk Tidak Ditemukan
+    </h1>
+    <p style="color:var(--slate); margin-bottom:0.3rem;">
+        Produk dengan ID <strong>#{{ id }}</strong> tidak tersedia dalam katalog.
+    </p>
+    <p style="color:var(--slate-light); font-size:0.86rem; margin-bottom:2rem;">
+        Produk mungkin sudah tidak tersedia atau ID tidak valid.
+    </p>
+    <a href="{% url 'katalog:daftar_produk' %}" class="btn btn-primary">Kembali ke Daftar Produk</a>
+</div>
+{% endblock %}

@@ -1,0 +1,291 @@
+{% extends 'katalog/base.html' %}
+
+{% block extra_css %}
+<style>
+    /* ─── KONTAK GRID ────────────────────────── */
+    .kontak-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 1.75rem;
+        margin-bottom: 1.75rem;
+        align-items: start;
+    }
+
+    /* ─── CARD DASAR ─────────────────────────── */
+    .kontak-card {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 2rem 2.25rem;
+    }
+
+    .kontak-card h2 {
+        font-family: 'DM Serif Display', serif;
+        font-size: 1.2rem;
+        color: var(--navy);
+        margin-bottom: 1.4rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid var(--border);
+    }
+
+    /* ─── KONTAK ITEM ────────────────────────── */
+    .kontak-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1rem 0;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .kontak-item:last-of-type { border-bottom: none; }
+
+    .kontak-icon {
+        width: 38px;
+        height: 38px;
+        background: var(--blue-light);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .kontak-icon svg {
+        width: 18px;
+        height: 18px;
+        stroke: var(--blue);
+    }
+
+    .kontak-label {
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        color: var(--slate-light);
+        margin-bottom: 0.2rem;
+    }
+
+    .kontak-value {
+        font-size: 0.92rem;
+        font-weight: 600;
+        color: var(--navy);
+        margin-bottom: 0.1rem;
+    }
+
+    .kontak-sub {
+        font-size: 0.8rem;
+        color: var(--slate);
+    }
+
+    /* ─── JAM OPERASIONAL ────────────────────── */
+    .jam-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.6rem 0;
+        font-size: 0.88rem;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .jam-row:last-child { border-bottom: none; }
+
+    .jam-hari { color: var(--slate); }
+
+    .jam-waktu {
+        font-weight: 600;
+        color: var(--navy);
+    }
+
+    .jam-waktu.tutup { color: #dc2626; }
+
+    .jam-badge-hari-ini {
+        font-size: 0.65rem;
+        background: var(--blue);
+        color: white;
+        padding: 0.1rem 0.45rem;
+        border-radius: 999px;
+        font-weight: 700;
+        margin-left: 0.4rem;
+        vertical-align: middle;
+    }
+
+    /* ─── NOTICE ─────────────────────────────── */
+    .notice {
+        background: #fffbeb;
+        border: 1px solid #fde68a;
+        border-radius: 8px;
+        padding: 0.85rem 1rem;
+        font-size: 0.83rem;
+        color: #92400e;
+        margin-top: 1.2rem;
+        line-height: 1.55;
+    }
+
+    /* ─── LOKASI CARD ────────────────────────── */
+    .lokasi-card {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 1.75rem 2.25rem;
+        margin-bottom: 1.75rem;
+        display: flex;
+        gap: 1.5rem;
+        align-items: center;
+    }
+
+    .lokasi-icon {
+        width: 52px;
+        height: 52px;
+        background: var(--blue-light);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .lokasi-icon svg {
+        width: 26px;
+        height: 26px;
+        stroke: var(--blue);
+    }
+
+    .lokasi-card h3 {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--navy);
+        margin-bottom: 0.25rem;
+    }
+
+    .lokasi-card p {
+        font-size: 0.86rem;
+        color: var(--slate);
+    }
+
+    @media (max-width: 700px) {
+        .kontak-grid { grid-template-columns: 1fr; }
+        .lokasi-card { flex-direction: column; align-items: flex-start; }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+    <h1>Hubungi Kami</h1>
+    <p>Kami senang mendengar dari Anda. Silakan hubungi kami melalui saluran yang tersedia.</p>
+</div>
+
+<!-- KONTAK GRID -->
+<div class="kontak-grid">
+
+    <!-- INFORMASI KONTAK -->
+    <div class="kontak-card">
+        <h2>Informasi Kontak</h2>
+
+        <div class="kontak-item">
+            <div class="kontak-icon">
+                <svg fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+                <div class="kontak-label">Alamat</div>
+                <div class="kontak-value">Jl. Pahlawan No. 45, Kel. Sukamaju</div>
+                <div class="kontak-sub">Kota Bandung, Jawa Barat 40123</div>
+            </div>
+        </div>
+
+        <div class="kontak-item">
+            <div class="kontak-icon">
+                <svg fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.16 2 2 0 012.11 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.45-.45a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            </div>
+            <div>
+                <div class="kontak-label">Telepon</div>
+                <div class="kontak-value">(022) 1234-5678</div>
+                <div class="kontak-sub">Senin &ndash; Jumat, 08.00 &ndash; 17.00 WIB</div>
+            </div>
+        </div>
+
+        <div class="kontak-item">
+            <div class="kontak-icon">
+                <svg fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+            </div>
+            <div>
+                <div class="kontak-label">WhatsApp</div>
+                <div class="kontak-value">+62 812-3456-7890</div>
+                <div class="kontak-sub">Tersedia setiap hari</div>
+            </div>
+        </div>
+
+        <div class="kontak-item">
+            <div class="kontak-icon">
+                <svg fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+                <div class="kontak-label">Email</div>
+                <div class="kontak-value">info@tokokita.id</div>
+                <div class="kontak-sub">Dibalas dalam 1 &times; 24 jam kerja</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAM OPERASIONAL -->
+    <div class="kontak-card">
+        <h2>Jam Operasional</h2>
+
+        <div class="jam-row">
+            <span class="jam-hari">Senin</span>
+            <span class="jam-waktu">08.00 &ndash; 17.00 WIB</span>
+        </div>
+        <div class="jam-row">
+            <span class="jam-hari">Selasa</span>
+            <span class="jam-waktu">08.00 &ndash; 17.00 WIB</span>
+        </div>
+        <div class="jam-row">
+            <span class="jam-hari">Rabu</span>
+            <span class="jam-waktu">08.00 &ndash; 17.00 WIB</span>
+        </div>
+        <div class="jam-row">
+            <span class="jam-hari">Kamis</span>
+            <span class="jam-waktu">08.00 &ndash; 17.00 WIB</span>
+        </div>
+        <div class="jam-row">
+            <span class="jam-hari">Jumat</span>
+            <span class="jam-waktu">08.00 &ndash; 16.00 WIB</span>
+        </div>
+        <div class="jam-row">
+            <span class="jam-hari">Sabtu</span>
+            <span class="jam-waktu">09.00 &ndash; 13.00 WIB</span>
+        </div>
+        <div class="jam-row">
+            <span class="jam-hari">Minggu</span>
+            <span class="jam-waktu tutup">Tutup</span>
+        </div>
+
+        <div class="notice">
+            Jam operasional dapat berubah pada hari libur nasional. Harap konfirmasi terlebih dahulu sebelum berkunjung.
+        </div>
+    </div>
+
+</div>
+
+<!-- LOKASI -->
+<div class="lokasi-card">
+    <div class="lokasi-icon">
+        <svg fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    </div>
+    <div>
+        <h3>Lokasi Toko</h3>
+        <p>Jl. Pahlawan No. 45, Kel. Sukamaju, Kota Bandung, Jawa Barat 40123</p>
+        <p style="margin-top:0.2rem;">Dekat Alun-alun Kota Bandung &mdash; mudah dijangkau dengan transportasi umum.</p>
+    </div>
+</div>
+
+<!-- TOMBOL KEMBALI -->
+<div>
+    <a href="{% url 'katalog:homepage' %}" class="btn btn-outline">&larr; Kembali ke Beranda</a>
+</div>
+
+{% endblock %}

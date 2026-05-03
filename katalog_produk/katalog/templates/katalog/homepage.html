@@ -1,0 +1,291 @@
+{% extends 'katalog/base.html' %}
+
+{% block extra_css %}
+<style>
+    /* ─── HERO ───────────────────────────────── */
+    .hero {
+        background: var(--navy);
+        border-radius: 12px;
+        padding: 4rem 3.5rem;
+        color: white;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 2.5rem;
+    }
+
+    .hero::after {
+        content: '';
+        position: absolute;
+        right: -60px;
+        top: -60px;
+        width: 320px;
+        height: 320px;
+        border-radius: 50%;
+        background: rgba(26, 86, 219, 0.25);
+        pointer-events: none;
+    }
+
+    .hero-label {
+        display: inline-block;
+        background: rgba(147, 187, 252, 0.18);
+        color: #93bbfc;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        padding: 0.3rem 0.8rem;
+        border-radius: 999px;
+        margin-bottom: 1.2rem;
+    }
+
+    .hero h1 {
+        font-family: 'DM Serif Display', serif;
+        font-size: 2.6rem;
+        line-height: 1.15;
+        margin-bottom: 1rem;
+        max-width: 520px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero p {
+        color: #94a3b8;
+        font-size: 1rem;
+        max-width: 460px;
+        margin-bottom: 2rem;
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero-actions {
+        display: flex;
+        gap: 0.8rem;
+        flex-wrap: wrap;
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero-btn-primary {
+        background: var(--blue);
+        color: white;
+        padding: 0.7rem 1.6rem;
+        border-radius: 7px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: background 0.15s, transform 0.15s;
+    }
+    .hero-btn-primary:hover { background: var(--blue-hover); transform: translateY(-1px); }
+
+    .hero-btn-ghost {
+        background: rgba(255,255,255,0.07);
+        color: #cbd5e1;
+        border: 1px solid rgba(255,255,255,0.12);
+        padding: 0.7rem 1.6rem;
+        border-radius: 7px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: background 0.15s;
+    }
+    .hero-btn-ghost:hover { background: rgba(255,255,255,0.12); color: white; }
+
+    /* ─── STATS ROW ──────────────────────────── */
+    .stats-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .stat-card {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 1.5rem 1.75rem;
+    }
+
+    .stat-card .stat-num {
+        font-family: 'DM Serif Display', serif;
+        font-size: 2.2rem;
+        color: var(--blue);
+        line-height: 1;
+        margin-bottom: 0.25rem;
+    }
+
+    .stat-card .stat-label {
+        font-size: 0.83rem;
+        color: var(--slate);
+        font-weight: 500;
+    }
+
+    /* ─── SECTION TITLE ──────────────────────── */
+    .section-heading {
+        font-family: 'DM Serif Display', serif;
+        font-size: 1.5rem;
+        color: var(--navy);
+        margin-bottom: 1.25rem;
+    }
+
+    /* ─── FITUR GRID ─────────────────────────── */
+    .fitur-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .fitur-item {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 1.5rem;
+        display: flex;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+
+    .fitur-icon {
+        width: 40px;
+        height: 40px;
+        background: var(--blue-light);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .fitur-icon svg {
+        width: 20px;
+        height: 20px;
+        stroke: var(--blue);
+    }
+
+    .fitur-item h3 {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--navy);
+        margin-bottom: 0.3rem;
+    }
+
+    .fitur-item p {
+        font-size: 0.86rem;
+        color: var(--slate);
+        line-height: 1.55;
+    }
+
+    /* ─── CTA STRIP ──────────────────────────── */
+    .cta-strip {
+        background: var(--blue-light);
+        border: 1px solid #c7d9fa;
+        border-radius: var(--radius);
+        padding: 2rem 2.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+
+    .cta-strip h3 {
+        font-family: 'DM Serif Display', serif;
+        font-size: 1.2rem;
+        color: var(--navy);
+        margin-bottom: 0.2rem;
+    }
+
+    .cta-strip p {
+        font-size: 0.86rem;
+        color: var(--slate);
+    }
+
+    @media (max-width: 640px) {
+        .hero { padding: 2.5rem 1.5rem; }
+        .hero h1 { font-size: 1.8rem; }
+        .stats-row { grid-template-columns: 1fr 1fr; }
+        .fitur-grid { grid-template-columns: 1fr; }
+        .cta-strip { flex-direction: column; align-items: flex-start; }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-label">Katalog Produk 2024</div>
+    <h1>Temukan Produk Terbaik untuk Kebutuhan Anda</h1>
+    <p>TokoKita menyediakan berbagai produk berkualitas dengan harga terjangkau dan layanan pelanggan yang terpercaya.</p>
+    <div class="hero-actions">
+        <a href="{% url 'katalog:daftar_produk' %}" class="hero-btn-primary">Lihat Semua Produk</a>
+        <a href="{% url 'katalog:kontak' %}" class="hero-btn-ghost">Hubungi Kami</a>
+    </div>
+</section>
+
+<!-- STATISTIK -->
+<div class="stats-row">
+    <div class="stat-card">
+        <div class="stat-num">{{ total_produk }}</div>
+        <div class="stat-label">Produk Tersedia</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-num">5</div>
+        <div class="stat-label">Kategori Produk</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Produk Bergaransi</div>
+    </div>
+</div>
+
+<!-- FITUR -->
+<h2 class="section-heading">Mengapa Belanja di TokoKita?</h2>
+<div class="fitur-grid">
+    <div class="fitur-item">
+        <div class="fitur-icon">
+            <svg fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <div>
+            <h3>Pengiriman Cepat</h3>
+            <p>Bekerja sama dengan ekspedisi terpercaya. Pesanan dikirim dalam 1–3 hari kerja ke seluruh Indonesia.</p>
+        </div>
+    </div>
+    <div class="fitur-item">
+        <div class="fitur-icon">
+            <svg fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div>
+            <h3>Transaksi Aman</h3>
+            <p>Sistem pembayaran terenkripsi menjamin keamanan data dan keuangan Anda di setiap transaksi.</p>
+        </div>
+    </div>
+    <div class="fitur-item">
+        <div class="fitur-icon">
+            <svg fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div>
+            <h3>Produk Original</h3>
+            <p>Semua produk adalah barang original bergaransi resmi dari distributor dan produsen terpercaya.</p>
+        </div>
+    </div>
+    <div class="fitur-item">
+        <div class="fitur-icon">
+            <svg fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.16 2 2 0 012.11 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.45-.45a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        </div>
+        <div>
+            <h3>Layanan Pelanggan</h3>
+            <p>Tim dukungan kami siap membantu Anda setiap hari melalui telepon, WhatsApp, maupun email.</p>
+        </div>
+    </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-strip">
+    <div>
+        <h3>Ada pertanyaan tentang produk?</h3>
+        <p>Tim kami siap membantu Anda menemukan produk yang tepat.</p>
+    </div>
+    <a href="{% url 'katalog:kontak' %}" class="btn btn-primary">Hubungi Kami</a>
+</div>
+
+{% endblock %}

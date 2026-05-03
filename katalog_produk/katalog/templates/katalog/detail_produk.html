@@ -1,0 +1,247 @@
+{% extends 'katalog/base.html' %}
+
+{% block extra_css %}
+<style>
+    /* ─── DETAIL LAYOUT ──────────────────────── */
+    .detail-grid {
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        gap: 1.75rem;
+        margin-bottom: 1.75rem;
+        align-items: start;
+    }
+
+    /* Panel kiri */
+    .panel-visual {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+    }
+
+    .visual-thumb {
+        height: 220px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .visual-thumb svg {
+        width: 80px;
+        height: 80px;
+        opacity: 0.6;
+    }
+
+    .visual-meta {
+        padding: 1rem 1.25rem;
+        border-top: 1px solid var(--border);
+    }
+
+    .visual-meta .id-label {
+        font-size: 0.75rem;
+        color: var(--slate-light);
+        margin-bottom: 0.4rem;
+    }
+
+    /* Panel kanan */
+    .panel-info {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 2rem 2.25rem;
+    }
+
+    .info-kategori { margin-bottom: 0.75rem; }
+
+    .info-nama {
+        font-family: 'DM Serif Display', serif;
+        font-size: 1.7rem;
+        color: var(--navy);
+        line-height: 1.2;
+        margin-bottom: 1rem;
+    }
+
+    .info-harga {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--blue);
+        margin-bottom: 0.75rem;
+    }
+
+    .stok-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        background: #f0fdf4;
+        border: 1px solid #bbf7d0;
+        color: #16a34a;
+        font-size: 0.82rem;
+        font-weight: 600;
+        padding: 0.35rem 0.9rem;
+        border-radius: 999px;
+        margin-bottom: 1.4rem;
+    }
+
+    .stok-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #16a34a;
+        display: inline-block;
+    }
+
+    .deskripsi-label {
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.6px;
+        text-transform: uppercase;
+        color: var(--slate-light);
+        margin-bottom: 0.5rem;
+    }
+
+    .deskripsi-teks {
+        font-size: 0.92rem;
+        color: #334155;
+        line-height: 1.7;
+    }
+
+    .aksi-row {
+        display: flex;
+        gap: 0.75rem;
+        margin-top: 1.75rem;
+    }
+
+    /* ─── SPESIFIKASI ────────────────────────── */
+    .spek-card {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 1.75rem 2.25rem;
+        margin-bottom: 1.75rem;
+    }
+
+    .spek-card h2 {
+        font-family: 'DM Serif Display', serif;
+        font-size: 1.2rem;
+        color: var(--navy);
+        margin-bottom: 1.2rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .spek-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .spek-table tr:last-child td { border-bottom: none; }
+
+    .spek-table td {
+        padding: 0.7rem 0.5rem;
+        font-size: 0.88rem;
+        border-bottom: 1px solid var(--border);
+        vertical-align: top;
+    }
+
+    .spek-table td:first-child {
+        color: var(--slate);
+        font-weight: 600;
+        width: 38%;
+        padding-right: 1rem;
+    }
+
+    .spek-table td:last-child {
+        color: var(--navy);
+        font-weight: 500;
+    }
+
+    .spek-table tr:hover td { background: #fafbfc; }
+
+    @media (max-width: 700px) {
+        .detail-grid { grid-template-columns: 1fr; }
+        .visual-thumb { height: 160px; }
+        .info-nama { font-size: 1.35rem; }
+        .panel-info { padding: 1.5rem; }
+        .spek-card { padding: 1.25rem 1.5rem; }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- BREADCRUMB -->
+<div class="page-header">
+    <div class="breadcrumb">
+        <a href="{% url 'katalog:homepage' %}">Beranda</a>
+        <span>&rsaquo;</span>
+        <a href="{% url 'katalog:daftar_produk' %}">Produk</a>
+        <span>&rsaquo;</span>
+        <span>{{ produk.nama }}</span>
+    </div>
+</div>
+
+<!-- DETAIL GRID -->
+<div class="detail-grid">
+
+    <!-- PANEL VISUAL -->
+    <div class="panel-visual">
+        <div class="visual-thumb" style="background: {{ produk.thumb_bg }};">
+            {{ produk.thumb_svg|safe }}
+        </div>
+        <div class="visual-meta">
+            <div class="id-label">ID Produk</div>
+            <span class="badge" style="background: {{ produk.warna_badge }};">{{ produk.kategori }}</span>
+            &nbsp;
+            <span style="font-size:0.8rem; color:var(--slate-light);">#{{ produk.id }}</span>
+        </div>
+    </div>
+
+    <!-- PANEL INFO -->
+    <div class="panel-info">
+        <div class="info-kategori">
+            <span class="badge" style="background: {{ produk.warna_badge }};">{{ produk.kategori }}</span>
+        </div>
+        <h1 class="info-nama">{{ produk.nama }}</h1>
+        <div class="info-harga">{{ produk.harga_format }}</div>
+        <div class="stok-pill">
+            <span class="stok-dot"></span>
+            Stok tersedia: {{ produk.stok }} unit
+        </div>
+
+        <hr class="divider">
+
+        <div class="deskripsi-label">Deskripsi Produk</div>
+        <p class="deskripsi-teks">{{ produk.deskripsi }}</p>
+
+        <div class="aksi-row">
+            <a href="{% url 'katalog:daftar_produk' %}" class="btn btn-outline">&larr; Kembali</a>
+            <a href="{% url 'katalog:kontak' %}" class="btn btn-primary">Tanya Produk</a>
+        </div>
+    </div>
+
+</div>
+
+<!-- SPESIFIKASI -->
+<div class="spek-card">
+    <h2>Spesifikasi Lengkap</h2>
+    <table class="spek-table">
+        <tbody>
+            {% for key, value in produk.spesifikasi.items %}
+            <tr>
+                <td>{{ key }}</td>
+                <td>{{ value }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- NAVIGASI BAWAH -->
+<div>
+    <a href="{% url 'katalog:daftar_produk' %}" class="btn btn-outline">&larr; Lihat Produk Lainnya</a>
+</div>
+
+{% endblock %}
